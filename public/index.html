@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AINTAR — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 24px 16px;
+    }
+
+    /* ── Card ── */
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 24px;
+      padding: 40px 40px 36px;
+      box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.18),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* ── Cabeçalho ── */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .icon-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #1B5E8E;
+      margin-bottom: 16px;
+    }
+    .icon-circle svg { width: 30px; height: 30px; fill: #fff; }
+
+    .header h1 {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      font-size: 1.625rem;
+      font-weight: 700;
+      color: #0A1628;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .header p {
+      font-size: 0.875rem;
+      color: rgba(10, 22, 40, 0.6);
+      line-height: 1.5;
+    }
+
+    /* ── Alerta sessão expirada ── */
+    .alert {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 0.875rem;
+      color: #5d4037;
+      line-height: 1.45;
+    }
+    .alert svg { width: 20px; height: 20px; fill: #f59e0b; flex-shrink: 0; margin-top: 1px; }
+    .alert span { flex: 1; }
+    .alert-close {
+      background: none; border: none; cursor: pointer;
+      padding: 0; color: #9e9e9e; flex-shrink: 0; line-height: 1;
+    }
+    .alert-close svg { width: 18px; height: 18px; fill: currentColor; }
+    .alert[hidden] { display: none; }
+
+    /* ── Campos MUI outlined ── */
+    .mf {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .mf input {
+      width: 100%;
+      padding: 16.5px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.23);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      background: rgba(255, 255, 255, 0.5);
+      color: #0A1628;
+      transition: border-color 0.2s;
+      line-height: 1.5;
+    }
+
+    .mf label {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: rgba(10, 22, 40, 0.55);
+      pointer-events: none;
+      transition: top 0.15s ease, font-size 0.15s ease, color 0.15s ease;
+      background: #fff;
+      padding: 0 4px;
+      line-height: 1;
+      font-family: inherit;
+    }
+
+    .mf input:focus ~ label,
+    .mf input:not(:placeholder-shown) ~ label {
+      top: 0;
+      font-size: 0.72rem;
+      transform: translateY(-50%);
+    }
+    .mf input:focus ~ label {
+      color: #1B5E8E;
+    }
+
+    .mf input:focus {
+      border-color: #1B5E8E;
+      border-width: 2px;
+      padding: 15.5px 13px;
+      background: #fff;
+    }
+    .mf input:hover:not(:focus) {
+      border-color: rgba(10, 22, 40, 0.87);
+    }
+
+    /* ── Link palavra-passe ── */
+    .forgot {
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 22px;
+    }
+    .forgot a {
+      font-size: 0.875rem;
+      color: #1B5E8E;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .forgot a:hover { text-decoration: underline; }
+
+    /* ── Botão Entrar ── */
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 100px;
+      background: #1B5E8E;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.15s ease;
+    }
+    button[type="submit"]:hover {
+      background: #154f78;
+      transform: translateY(-2px);
+    }
+    button[type="submit"]:active { transform: translateY(0); }
+    button[type="submit"]:disabled {
+      background: rgba(0, 0, 0, 0.12);
+      color: rgba(0, 0, 0, 0.26);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── Divisor OU ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 22px 0;
+      color: rgba(10, 22, 40, 0.5);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    /* ── Link criar conta ── */
+    .register {
+      text-align: center;
+      font-size: 0.875rem;
+      color: rgba(10, 22, 40, 0.6);
+    }
+    .register a {
+      color: #1B5E8E;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .register a:hover { text-decoration: underline; }
+
+    /* ── Copyright ── */
+    .copyright {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    /* ── Spinner ── */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+    .spinner[hidden] { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 480px) {
+      .card { padding: 32px 24px 28px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <div class="header">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2
+                   2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1
+                   1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2z"/>
+        </svg>
+      </div>
+      <h1>Bem-vindo de volta</h1>
+      <p>Entre com as suas credenciais para continuar</p>
+    </div>
+
+    <!-- Alerta sessão expirada (oculto por defeito) -->
+    <div class="alert" id="sessionAlert" hidden>
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+        10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+      <span>A sua sessão expirou por inatividade. Por favor, faça login novamente.</span>
+      <button class="alert-close" onclick="document.getElementById('sessionAlert').hidden=true" aria-label="Fechar">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41
+          5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59
+          13.41 12z"/></svg>
+      </button>
+    </div>
+
+    <form id="loginForm" action="/v1/login/submit" method="POST" autocomplete="on">
+      <input type="hidden" name="token" id="tokenField" value="" />
+
+      <div class="mf">
+        <input
+          type="text" id="username" name="username"
+          autocomplete="username" autofocus placeholder=" "
+        />
+        <label for="username">Utilizador</label>
+      </div>
+
+      <div class="mf">
+        <input
+          type="password" id="password" name="password"
+          autocomplete="current-password" placeholder=" "
+        />
+        <label for="password">Palavra-passe</label>
+      </div>
+
+      <div class="forgot">
+        <a href="#">Esqueceu-se da palavra-passe?</a>
+      </div>
+
+      <button type="submit" id="submitBtn">
+        <span class="spinner" id="spinner" hidden></span>
+        <span id="btnLabel">Entrar</span>
+      </button>
+    </form>
+
+    <div class="divider">OU</div>
+
+    <div class="register">
+      Não tem uma conta?&nbsp;<a href="#">Criar conta</a>
+    </div>
+
+  </div>
+
+  <p class="copyright">© 2026 AINTAR — Todos os direitos reservados</p>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('tokenField').value = params.get('t') || '';
+      if (params.get('expired') === '1') {
+        document.getElementById('sessionAlert').hidden = false;
+      }
+    })();
+
+    document.getElementById('loginForm').addEventListener('submit', function () {
+      const btn    = document.getElementById('submitBtn');
+      const spinner = document.getElementById('spinner');
+      const label  = document.getElementById('btnLabel');
+      btn.disabled = true;
+      spinner.hidden = false;
+      label.textContent = 'A entrar...';
+    });
+  </script>
+</body>
+</html>

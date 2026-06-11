@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aviso de Segurança — AINTAR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+      padding: 16px;
+    }
+    .card {
+      background: #fff; border-radius: 12px;
+      padding: 44px 48px; max-width: 560px; width: 100%;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      text-align: center;
+    }
+    .icon {
+      font-size: 4rem; margin-bottom: 16px; display: block;
+      animation: shake .5s ease-in-out;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60%  { transform: translateX(-8px); }
+      40%,80%  { transform: translateX(8px); }
+    }
+    h1 { font-size: 1.7rem; font-weight: 700; color: #b71c1c; margin-bottom: 12px; }
+    .subtitle { font-size: 1.05rem; color: #333; margin-bottom: 28px; line-height: 1.6; }
+    .alert-box {
+      background: #fff8f8; border: 2px solid #f44336;
+      border-radius: 8px; padding: 18px 22px;
+      text-align: left; margin-bottom: 28px;
+    }
+    .alert-box h3 { color: #c62828; font-size: .95rem; margin-bottom: 10px; }
+    .alert-box ul { padding-left: 20px; }
+    .alert-box li { margin-bottom: 8px; font-size: .9rem; color: #444; line-height: 1.5; }
+    .tips {
+      background: #f1f8e9; border: 2px solid #8bc34a;
+      border-radius: 8px; padding: 18px 22px;
+      text-align: left; margin-bottom: 28px;
+    }
+    .tips h3 { color: #33691e; font-size: .95rem; margin-bottom: 10px; }
+    .tips li { margin-bottom: 8px; font-size: .9rem; color: #444; line-height: 1.5; }
+    .tips ul { padding-left: 20px; }
+    .footer-note {
+      font-size: .82rem; color: #888; border-top: 1px solid #eee;
+      padding-top: 16px; margin-top: 8px;
+    }
+    .badge {
+      display: inline-block; background: #d32f2f; color: #fff;
+      font-size: .75rem; font-weight: 600; border-radius: 4px;
+      padding: 2px 8px; text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="icon">&#9888;&#65039;</span>
+    <span class="badge">Exercício de segurança</span>
+    <h1>Cuidado! Poderia ter sido um ataque real.</h1>
+    <p class="subtitle">
+      Esta era uma <strong>simulação de phishing</strong> realizada pela equipa de segurança da AINTAR
+      para avaliar a prontidão dos colaboradores. Não foi transmitida qualquer informação real.
+    </p>
+
+    <div class="alert-box">
+      <h3>&#128274; O que aconteceu?</h3>
+      <ul>
+        <li>Recebeu um link que imitava a página de login da AINTAR.</li>
+        <li>Ao clicar no link, o acesso foi registado.</li>
+        <li>Ao tentar introduzir credenciais, a tentativa foi registada (a password <strong>nunca foi armazenada</strong>).</li>
+      </ul>
+    </div>
+
+    <div class="tips">
+      <h3>&#128994; Como se proteger no futuro</h3>
+      <ul>
+        <li>Verifique sempre o <strong>endereço URL</strong> antes de introduzir credenciais.</li>
+        <li>Desconfie de e-mails com links urgentes, mesmo que pareçam legítimos.</li>
+        <li>Em caso de dúvida, contacte o departamento de IT antes de clicar.</li>
+        <li>Active a autenticação de dois fatores (2FA) sempre que possível.</li>
+        <li>Nunca reutilize passwords entre serviços.</li>
+      </ul>
+    </div>
+
+    <div class="footer-note">
+      Este exercício foi conduzido no âmbito do programa de consciencialização de segurança da AINTAR.
+      Para mais informações contacte o responsável de segurança.
+    </div>
+  </div>
+</body>
+</html>
